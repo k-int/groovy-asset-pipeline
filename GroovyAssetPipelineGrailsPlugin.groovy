@@ -22,7 +22,7 @@ class GroovyAssetPipelineGrailsPlugin {
 
     def organization = [ name: "Knowledge Integration", url: "http://www.k-int.com/" ]
     //def issueManagement = [ system: "GITHUB", url: "http://github.com/tednaleid/groovy-template-grails-asset-pipeline/issues" ]
-    //def scm = [ url: "http://github.com/tednaleid/groovy-template-grails-asset-pipeline" ]
+    def scm = [ url: "http://github.com/k-int/groovy-asset-pipeline" ]
     
     def doWithDynamicMethods = { ctx ->
       
