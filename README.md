@@ -1,4 +1,4 @@
-gsp-grails-asset-pipeline
+groovy-asset-pipeline
 =========================
 
 GSP pre-processing of assets for the Grails asset pipeline plugin.

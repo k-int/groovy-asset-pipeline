@@ -1,0 +1,9 @@
+.*
+!.classpath
+!.gitignore
+target
+target-eclipse
+*.sha1
+*.zip
+web-app
+

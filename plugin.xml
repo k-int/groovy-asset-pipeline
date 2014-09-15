@@ -1,0 +1,10 @@
+<plugin name='groovy-asset-pipeline' version='1.0' grailsVersion='2.3 &gt; *'>
+  <author>Steve Osguthorpe</author>
+  <authorEmail>steve.osguthorpe@k-int.com</authorEmail>
+  <title>GSP Support for Grails Asset Pipeline</title>
+  <description>Provides GSP Template support (including Grails Config access) to asset pipeline files.</description>
+  <type>GroovyAssetPipelineGrailsPlugin</type>
+  <resources>
+    <resource>BootStrap</resource>
+  </resources>
+</plugin>
