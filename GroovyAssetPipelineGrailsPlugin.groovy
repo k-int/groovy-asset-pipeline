@@ -12,12 +12,16 @@ class GroovyAssetPipelineGrailsPlugin {
     // The version or versions of Grails the plugin is designed for.
     def grailsVersion = "2.4 > *"
 
-    def title = "GSP Support for Grails Asset Pipeline"
+    def title = "SimpleTemplateEngine support for Grails Asset Pipeline"
 
     def author = "Steve Osguthorpe"
     def authorEmail = "steve.osguthorpe@k-int.com"
 
-    def description = 'Provides GSP Template support (including Grails Config access) to asset pipeline files.'
+    def description = '''\
+Provides SimpleTemplateEngine processing support (including Grails Config access) to asset pipeline files.\
+2 items are bound to the template for convenient access withihn your templates. \"config\" and \"grailsApplpication\".\
+The dolar sign '$' should be escaped (\$) to stop the template from interpreting as a groovy expression.
+'''
 //    def documentation = ""
 
     def organization = [ name: "Knowledge Integration", url: "http://www.k-int.com/" ]

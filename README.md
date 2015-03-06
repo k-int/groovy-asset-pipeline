@@ -1,4 +1,4 @@
 groovy-asset-pipeline
 =========================
 
-GSP pre-processing of assets for the Grails asset pipeline plugin.
+Groovy Simple Template Engine pre-processing of assets for the Grails asset pipeline plugin.
