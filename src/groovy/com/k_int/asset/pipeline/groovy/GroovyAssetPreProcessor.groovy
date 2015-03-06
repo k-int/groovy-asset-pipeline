@@ -21,20 +21,21 @@ class GroovyAssetPreProcessor {
     GrailsApplication grailsApplication
     
     if (!compiler) {
-      log.debug("Constructing Groovy template pre-processor.")
       grailsApplication = Holders.getGrailsApplication()
       
     } else {
-      log.debug("Constructing Groovy template pre-processor for pre-compilation.")
       
       // Called from script. We read the attributes from the options passed from our event listener.
       grailsApplication = compiler.options."grailsApplication"
     }
     
     // Create the simple template engine if we haven't got one.
-    if (!engine) engine = new SimpleTemplateEngine()
+    if (!engine) {
+      log.debug("Constructing Groovy template pre-processor.")
+      engine = new SimpleTemplateEngine()
+    }
     
-    log.debug ("Adding bindings to pass through.")
+    log.debug ("Adding bindings to pass to template.")
     this.binding = [
       grailsApplication: grailsApplication,
       config: grailsApplication.config
@@ -45,10 +46,10 @@ class GroovyAssetPreProcessor {
 
     // Just check the extension... If it matches one we process then we should
     // act on it.
-    if (inputText && extensions.find { assetFile?.file?.getPath()?.matches("^.+\\.${it}\\..+") }) {
+    if (inputText && extensions.find { assetFile?.path?.matches("^.+\\.${it}\\..+") }) {
 
       // Attempt to process the file.
-      log.debug("Processing assetFile: ${assetFile.file.name} as Groovy text")
+      log.debug("Processing assetFile: ${assetFile.name} as Groovy text")
       StringWriter stringWriter = new StringWriter()
       try {
         engine.createTemplate(inputText).make(binding).writeTo(stringWriter)
@@ -59,9 +60,11 @@ class GroovyAssetPreProcessor {
       } finally {
         stringWriter.close()
       }
+      
     }
-
-    log.debug("Groovy processor skipping assetFile: ${assetFile.file.name}")
+    
+    log.debug("Groovy processor skipping assetFile: ${assetFile.name}")
+    
     // Just return the original if we don't recognise this file.
     return inputText
   }

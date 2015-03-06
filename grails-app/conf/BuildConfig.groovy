@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
             export = false
         }
               
-        compile (':asset-pipeline:1.9.9') {
+        compile (':asset-pipeline:2.1.1') {
           export = false
         }
     }

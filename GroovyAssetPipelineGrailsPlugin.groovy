@@ -1,7 +1,7 @@
 import java.util.Collection;
 
 import asset.pipeline.AssetFile
-import asset.pipeline.AssetHelper;
+import asset.pipeline.AssetHelper
 
 import com.k_int.asset.pipeline.groovy.*
 
@@ -10,7 +10,7 @@ class GroovyAssetPipelineGrailsPlugin {
     def version = "1.2"
 
     // The version or versions of Grails the plugin is designed for.
-    def grailsVersion = "2.3 > *"
+    def grailsVersion = "2.4 > *"
 
     def title = "GSP Support for Grails Asset Pipeline"
 
@@ -25,11 +25,18 @@ class GroovyAssetPipelineGrailsPlugin {
     def scm = [ url: "http://github.com/k-int/groovy-asset-pipeline" ]
     
     def doWithDynamicMethods = { ctx ->
-      
-      // Replace the asset helper list with a new list implementation that ensures our preprocessor is present.
+  
+      // Grab the current values.
       def current_specs = AssetHelper.assetSpecs
       
-      AssetHelper.assetSpecs = new ExtendedAssetSpecList()
-      AssetHelper.assetSpecs.addAll(current_specs)
+      final ExtendedAssetSpecList listener = new ExtendedAssetSpecList()
+      
+      // Add all the current values to the new list.
+      listener.addAll(current_specs)
+      
+      // Add a getter for the assetspecs so users will grab that instead.  
+      AssetHelper.metaClass.static.getAssetSpecs = { ->
+        listener
+      }
     }
 }

@@ -1,19 +1,24 @@
 // includeTargets << new File(assetPipelinePluginDir, "scripts/_AssetCompile.groovy")
-import com.k_int.asset.pipeline.groovy.ExtendedAssetSpecList
-import asset.pipeline.AssetHelper
 
 eventAssetPrecompileStart = { assetConfig ->
   
-  // Replace with our special listeneing list.
+  // Replace the asset specs with our special list implementation that will ensure our pre-processor
+  // is run first. Since asset-pipeline separated the asset core the assetSpecs property was made final.
+  // We extend using the meta-class.
+  Class ExtendedAssetSpecList = Class.forName("com.k_int.asset.pipeline.groovy.ExtendedAssetSpecList")
+  Class AssetHelper = Class.forName("asset.pipeline.AssetHelper") 
   def current_specs = AssetHelper.assetSpecs
-  AssetHelper.assetSpecs = new ExtendedAssetSpecList()
-  AssetHelper.assetSpecs.addAll(current_specs)
+      
+  final def listener = ExtendedAssetSpecList.newInstance()
   
-  // We need to supply the context and the application here so that our
-  // pre-processor can access them when run from a script.
-//  assetConfig.grailsApplication = grailsApplication
-//  ctx: appCtx, grailsApplication: grailsApp
+  // Add all the current values to the new list.
+  listener.addAll(current_specs)
   
+  // Add a getter for the assetspecs so our special listening list will be returned instead.  
+  AssetHelper.metaClass.static.getAssetSpecs = { ->
+    listener
+  }
+    
   loadApp()
   
   // loadApp creates the following vars.
