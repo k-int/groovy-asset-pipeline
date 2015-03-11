@@ -19,20 +19,23 @@ class GroovyAssetPreProcessor {
   
   GroovyAssetPreProcessor(AssetCompiler compiler = null) {
     GrailsApplication grailsApplication
+    ClassLoader cl
     
     if (!compiler) {
       grailsApplication = Holders.getGrailsApplication()
+      cl = grailsApplication.getClassLoader()
       
     } else {
       
       // Called from script. We read the attributes from the options passed from our event listener.
       grailsApplication = compiler.options."grailsApplication"
+      cl = compiler.options."classLoader"
     }
     
     // Create the simple template engine if we haven't got one.
     if (!engine) {
       log.debug("Constructing Groovy template pre-processor.")
-      engine = new SimpleTemplateEngine()
+      engine = new SimpleTemplateEngine(cl)
     }
     
     log.debug ("Adding bindings to pass to template.")

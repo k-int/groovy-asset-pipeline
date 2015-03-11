@@ -1,8 +1,9 @@
-<plugin name='groovy-asset-pipeline' version='1.2' grailsVersion='2.3 &gt; *'>
+<plugin name='groovy-asset-pipeline' version='1.0' grailsVersion='2.4 &gt; *'>
   <author>Steve Osguthorpe</author>
   <authorEmail>steve.osguthorpe@k-int.com</authorEmail>
-  <title>GSP Support for Grails Asset Pipeline</title>
-  <description>Provides GSP Template support (including Grails Config access) to asset pipeline files.</description>
+  <title>SimpleTemplateEngine support for Grails Asset Pipeline</title>
+  <description>Provides SimpleTemplateEngine processing support (including Grails Config access) to asset pipeline files.2 items are bound to the template for convenient access withihn your templates. "config" and "grailsApplpication".The dolar sign '$' should be escaped ($) to stop the template from interpreting as a groovy expression.
+</description>
   <type>GroovyAssetPipelineGrailsPlugin</type>
   <resources />
 </plugin>
