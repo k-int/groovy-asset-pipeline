@@ -19,7 +19,7 @@ eventAssetPrecompileStart = { assetConfig ->
     listener
   }
     
-  loadApp()
+  bootstrapOnce()
   
   // loadApp creates the following vars.
   // grailsApp
